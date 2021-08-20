@@ -6,8 +6,11 @@ The AIM tool is tested using java version "1.8.0_221"
 How to run the tool:
 
 c:\> java -jar AIMTool.jar filename.turn option
+
 option = 1 for default intervals, i.e., [-100, 100]
+
 option = 2 for [0, 100] intervals
+
 option = 0 for user defined intervals (the user will be prompted to enter interval lower and upper bounds for each GRL intentional element leaf element)
 
 Below is a sample execution of the tool using the alumni.turn case study:
@@ -15,38 +18,55 @@ Below is a sample execution of the tool using the alumni.turn case study:
 c:\>java -jar AIMTool.jar alumni.turn 0
 Please enter the interval lower bound for:organizenetworkingevents:
 10
+
 Please enter the interval upper bound for:organizenetworkingevents:
 50
+
 Please enter the interval lower bound for:usesocialmedia:
 10
+
 Please enter the interval upper bound for:usesocialmedia:
 50
+
 Please enter the interval lower bound for:supportindustryprojects:
 20
+
 Please enter the interval upper bound for:supportindustryprojects:
 60
+
 Please enter the interval lower bound for:provideaccessfacilities:
 30
+
 Please enter the interval upper bound for:provideaccessfacilities:
 70
+
 Please enter the interval lower bound for:donatetouniverity:
 10
+
 Please enter the interval upper bound for:donatetouniverity:
 100
+
 Please enter the interval lower bound for:identifycollaborationareas:
 30
+
 Please enter the interval upper bound for:identifycollaborationareas:
 50
+
 Please enter the interval lower bound for:advertisejobopenings:
 10
+
 Please enter the interval upper bound for:advertisejobopenings:
 100
+
 Please enter the interval lower bound for:shareexpwithstudents:
 10
+
 Please enter the interval upper bound for:shareexpwithstudents:
 100
+
 Please enter the interval lower bound for:mentorcurrentstudents:
 10
+
 Please enter the interval upper bound for:mentorcurrentstudents:
 100
 
