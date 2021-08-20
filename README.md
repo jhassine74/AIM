@@ -1,20 +1,17 @@
 # AIM
 AIM Tool for measuring and classifying inter-actor dependencies in textual GRL goal models.
 
-Java version: 
-----------------
+The AIM tool is tested using java version "1.8.0_221"
 
-Tested using java version "1.8.0_221"
------------------------------------
-How to run the tool
-------------------------
+How to run the tool:
+
 c:\> java -jar AIMTool.jar filename.turn option
 option = 1 for default intervals, i.e., [-100, 100]
 option = 2 for [0, 100] intervals
 option = 0 for user defined intervals (the user will be prompted to enter interval lower and upper bounds for each GRL intentional element leaf element)
-------------------------------
-Sample execution of the tool using the alumni.turn case study
-------------------------------
+
+Below is a sample execution of the tool using the alumni.turn case study:
+
 c:\>java -jar AIMTool.jar alumni.turn 0
 Please enter the interval lower bound for:organizenetworkingevents:
 10
@@ -52,8 +49,10 @@ Please enter the interval lower bound for:mentorcurrentstudents:
 10
 Please enter the interval upper bound for:mentorcurrentstudents:
 100
+
 -------------------------------------------------
 ===== PART A:(All Dependencies vs Isolation) =====
+
 -------------------------------------------------------
 
 ===============Leaf Element(s)' Satisfaction Values intervals:=================
@@ -117,6 +116,7 @@ Interaction Type: Neutral/No External Interaction
 
 ======================================================
 PART B:(All Dependencies Except D vs All Dependencies)
+
 ======================================================
 1) Remove dependency link between enhancedcollindustry--->establishresearchcollaboration(D1)
 
@@ -169,6 +169,7 @@ Dependency Impact: Neutral
 
 ======================================================
 PART C: I- Most harmful dependency for each actor(if any)
+
 =====================================
 
 The most harmful interaction for actor 'alumnirelations' is D1 which is between: enhancedcollindustry--->establishresearchcollaboration
@@ -177,6 +178,7 @@ The actor 'alumnus' has no harmful/external dependency(ies)
 
 =============================================================
 PART C: II- Most beneficial dependency for each actor(if any)
+
 =============================================================
 The actor 'alumnirelations' has no beneficial/external dependency(ies)
 
