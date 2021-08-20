@@ -16,6 +16,7 @@ option = 0 for user defined intervals (the user will be prompted to enter interv
 Below is a sample execution of the tool using the alumni.turn case study:
 
 c:\>java -jar AIMTool.jar alumni.turn 0
+
 Please enter the interval lower bound for:organizenetworkingevents:
 10
 
