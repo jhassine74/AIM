@@ -1,0 +1,54 @@
+urnModel Example {
+description "This-is-an-example."
+author "ITU-T"
+created "Feb-20-2017"
+modified "Feb-20-2017"
+version "1.0"
+urnVersion "29.0"
+}
+
+actor TelecomProvider#"Telecom Provider" {
+
+	goal VoiceConn#"Voice Connection Be Setup" {
+	importance 50
+	}
+
+	softgoal HighRel#"High Reliability" {
+	importance 75
+	}
+
+	softgoal SpecUsage#"Minimize Spectrum Usage" {
+	importance 60
+	}
+
+	task MakeVoiceOverInternet#"Make Voice Connection Over Internet" {
+	contributesTo HighRel with somePositive
+	contributesTo SpecUsage correlated with somePositive
+	xor decomposes VoiceConn
+	}
+
+	task MakeVoiceOverWireless#"Make Voice Connection Over Wireless" {
+	contributesTo HighRel with make
+	contributesTo SpecUsage correlated with someNegative
+	xor decomposes VoiceConn
+	}
+	indicator VoiceConnFailureRate#"Failure Rate for Voice ConnectionOver
+	Internet" {
+	unit "failures/week/10000 connections"
+	contributesTo MakeVoiceOverInternet with 100
+	dependsOn Technician.LoggEquip
+	}
+
+	belief WirelessReliability#"Wireless is less reliable than Internet" {
+	 
+	}
+}
+
+actor Technician#"Technician" {
+	resource LoggEquip#"Logging Equipment" {
+	dependsOn EquipSetup
+	}
+	task EquipSetup#"Correctly setup logging equipment" {
+	importance High
+	}
+}

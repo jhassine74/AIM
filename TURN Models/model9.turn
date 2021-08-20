@@ -1,0 +1,114 @@
+urnModel Example {
+description "This-is-an-example."
+author "ITU-T"
+created "Feb-20-2017"
+modified "Feb-20-2017"
+version "1.0"
+urnVersion "29.0"
+}
+
+actor A1#""{
+	goal G1#""{
+		importance 100
+	}
+	
+	goal G2#""{
+		contributesTo G1 with 100
+		dependsOn B.G4 
+	}
+
+	task T1#""{ 
+		or decomposes G2
+	}
+	task T2#""{
+		or decomposes G2
+	}
+}
+
+
+actor A2#""{
+	goal G3#""{
+		importance High
+	}
+
+	goal G4#""{
+		contributesTo G3 with 100
+	}
+	
+	task T3#""{
+		contributesTo G4 with 25
+		dependsOn A3.T7
+	}
+}
+
+actor A3#""{
+	goal G10#""{
+		importance 100
+	}
+	
+	goal G11#""{
+		contributesTo G10 with 75
+	}
+
+	task T7#""{
+		and decomposes G11
+	}
+}
+
+actor A4#""{
+	goal G5#""{
+		importance 50
+		or decomposes A1.G2
+	}
+
+	goal G6#""{
+		importance 50
+		contributesTo A2.G4 with 25
+	}
+
+	softgoal G7#""{
+		contributesTo G5 with 100
+		contributesTo G6 with 75
+		dependsOn A5.G9
+	}
+
+	task T4#""{
+		contributesTo G7 with 50
+	}
+
+	task T5#""{
+		contributesTo G7 with 50
+	}
+}
+
+actor A5#""{
+
+	goal G8#""{
+		importance 100
+		and decomposes A3.G11
+	}
+
+	goal G9#""{
+		contributesTo G8 with 100
+		dependsOn A6.T8
+	}
+
+	task T6#""{
+		contributesTo G9 with 75
+	}
+}
+
+actor A6#""{
+	goal G12#""{
+		importance 100
+		and decomposes A3.G11
+	}
+
+	goal G13#""{
+		contributesTo G12 with 100
+	}
+
+	task T8#""{
+		contributesTo G13 with 25
+	}
+}

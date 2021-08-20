@@ -1,0 +1,129 @@
+urnModel Example {
+description "This-is-an-example."
+author "ITU-T"
+created "Feb-20-2017"
+modified "Feb-20-2017"
+version "1.0"
+urnVersion "29.0"
+}
+
+actor Organisation#""{
+	softgoal HelpKids#""{
+		importance 100
+	}
+
+	softgoal HelpasManyKidsasPossible#""{
+		contributesTo HelpKids with 25
+	}
+
+	softgoal IncreaseFunds#""{
+		contributesTo HelpasManyKidsasPossible with 25
+	}
+
+
+	softgoal AvoidScandal#""{
+		contributesTo IncreaseFunds with 25
+	}
+
+
+	goal ProvideCounselling#""{
+		importance 50
+	}
+
+	softgoal HighQualityCounselling2#""{
+		contributesTo HelpKids with 25
+		dependsOn Counsellors.HighQualityCounselling
+	}
+
+	softgoal Anonymity#""{
+		contributesTo AvoidScandal with 25
+	}
+
+	softgoal Immediacy#""{
+		contributesTo HelpKids with 25
+	}
+
+	task UseTextMessaging3#""{
+		contributesTo HighQualityCounselling2 with -100
+		contributesTo Anonymity with 25
+		contributesTo Immediacy with -25
+		or decomposes ProvideCounselling
+		dependsOn Counsellors.UseTextMessaging2
+	}
+
+	task KidsUseCyberCafe3#""{
+		contributesTo HighQualityCounselling2 with -25
+		contributesTo Anonymity with -25
+		contributesTo Immediacy with 25
+		or decomposes ProvideCounselling
+		dependsOn Counsellors.KidsUseCyberCafe2
+		dependsOn KidsAndYouth.KidsUseCyberCafe
+	}
+
+	
+}
+actor KidsAndYouth#""{
+	softgoal GetEffectiveHelp#""{
+		importance 50
+	}
+	
+	goal HelpbeAcquired#""{
+		importance 50
+	}
+
+	softgoal ComfortablenesswithService#""{
+		contributesTo GetEffectiveHelp with 25
+	}
+
+	softgoal Anonymity(Service)#""{
+		contributesTo GetEffectiveHelp with 25
+	}
+
+	softgoal Immediacy(Service)#""{
+		contributesTo GetEffectiveHelp with 25
+	}
+
+	task UseTextMessaging#""{
+		contributesTo ComfortablenesswithService with 25
+		contributesTo Anonymity(Service) with 25
+		contributesTo Immediacy(Service) with -25
+		or decomposes HelpbeAcquired
+	}
+
+	task KidsUseCyberCafe#""{
+		contributesTo ComfortablenesswithService with 25
+		contributesTo Anonymity(Service) with -25
+		contributesTo Immediacy(Service) with 100
+		or decomposes HelpbeAcquired
+	}
+}
+
+actor Counsellors#""{
+	softgoal Happiness#""{
+		importance 50
+	}
+	
+	goal ProvideOnlineCounselling#""{
+		importance 50
+	}
+
+	softgoal HighQualityCounselling#""{
+		contributesTo Happiness with 25
+	}
+
+	softgoal ListenforCues#""{
+		contributesTo HighQualityCounselling with 25
+	}
+
+	
+
+	task UseTextMessaging2#""{
+		contributesTo ListenforCues with -100
+		or decomposes ProvideOnlineCounselling
+	}
+
+	task KidsUseCyberCafe2#""{
+		contributesTo ListenforCues with -25
+		or decomposes ProvideOnlineCounselling
+	}
+}
