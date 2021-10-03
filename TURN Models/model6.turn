@@ -1,0 +1,100 @@
+urnModel Example {
+description "This-is-an-example."
+author "ITU-T"
+created "Feb-25-2020"
+modified "Feb-25-2020"
+version "1.0"
+urnVersion "29.0"
+}
+
+actor User#""{
+	softgoal ComfortableDriving#""{
+		importance 50
+	}
+	
+	softgoal ReduceCost#""{
+		importance 50
+	}
+
+	indicator Vibration#""{
+		contributesTo ComfortableDriving with 50
+	}
+}
+
+actor System#""{
+	goal Operate#""{
+		importance 100
+	}
+
+	goal Drive#""{
+		and decomposes Operate
+	}
+
+	goal ProvideServices#""{
+		and decomposes Operate 
+	}
+
+	task Light#""{
+		or decomposes ProvideServices
+	}
+
+	task AirConditioner#""{
+		or decomposes ProvideServices
+	}
+	
+	goal PowerTransportation#""{
+		and decomposes Drive
+	}
+	
+	task Pipes#""{
+		or decomposes PowerTransportation
+	}
+
+	task Wires#""{
+		or decomposes PowerTransportation
+	}
+
+	goal PowerSourceMgt#""{
+		and decomposes Drive
+	}
+
+	task Fuel#""{
+		or decomposes PowerSourceMgt
+	}
+
+	task Battery#""{
+		or decomposes PowerSourceMgt
+	}
+
+	goal Acceleration#""{
+		and decomposes Drive
+	}
+	
+	task ElectricEngine#""{
+		or decomposes Acceleration
+		contributesTo User.ComfortableDriving with -50
+		contributesTo User.ReduceCost with 50
+	}
+	
+	task FuelEngine#""{
+		or decomposes Acceleration
+		contributesTo User.ComfortableDriving with 50
+		contributesTo User.ReduceCost with -50
+	}
+	
+	goal Control#""{
+		and decomposes Drive
+	}
+
+	task ManageSpeed#""{
+		or decomposes Control
+	}
+
+	task ManageDistance#""{
+		or decomposes Control
+	}
+	
+	task Distance#""{
+		contributesTo ManageDistance with 100
+	}
+}

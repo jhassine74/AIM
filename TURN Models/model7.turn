@@ -1,0 +1,44 @@
+urnModel Example {
+description "This-is-an-example."
+author "ITU-T"
+created "Feb-25-2020"
+modified "Feb-25-2020"
+version "1.0"
+urnVersion "29.0"
+}
+actor TechnologyProvider#""{
+	task SellTechforProfit#""{
+		importance 100
+		dependsOn TechnologyUser.PurchaseTech
+	}
+	task ProduceTech#""{
+		and decomposes SellTechforProfit
+		dependsOn TechnologyUser.PurchaseTech
+	}
+	
+	softgoal Profit#""{
+		and decomposes SellTechforProfit
+	}
+
+	softgoal TechUserAbidebyRules#""{
+		contributesTo Profit with 25
+		dependsOn TechnologyUser.AbidebyRules
+	}
+}
+actor TechnologyUser#""{
+	goal TechBeObtained#""{
+		importance 100
+	}
+	softgoal AbidebyRules#""{}
+	softgoal AffordableTech#""{}
+	task PurchaseTech#""{
+		contributesTo AbidebyRules with 100
+		contributesTo AffordableTech with -75
+		or decomposes TechBeObtained
+	}
+	task ObtainTechfromDataPirate#""{
+		contributesTo AbidebyRules with -100
+		contributesTo AffordableTech with 100
+		or decomposes TechBeObtained
+	}
+}

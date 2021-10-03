@@ -1,0 +1,67 @@
+urnModel Example {
+description "This-is-an-example."
+author "ITU-T"
+created "Feb-25-2020"
+modified "Feb-25-2020"
+version "1.0"
+urnVersion "29.0"
+}
+actor City#""{
+	softgoal ReduceOperatingCosts#""{
+		importance 50
+	}
+	softgoal PositiveCityImage#""{
+		importance 50
+		contributesTo Citizen.EnjoyCity with 25
+	}
+	goal ManageCityWaste#""{
+		importance 50
+	}
+	task UseCurrentDump#""{
+		or decomposes ManageCityWaste
+	}
+	task UseNewDump#""{
+		or decomposes ManageCityWaste
+	}
+	resource SpaceinDump#""{
+		and decomposes UseCurrentDump
+	}
+	task BuildLargeDump#""{
+		and decomposes UseNewDump
+	}
+	task BuildSmallDump#""{
+		and decomposes UseNewDump
+		contributesTo ReduceOperatingCosts with 25
+	}
+	task ProcessGreenWaste#""{
+		contributesTo ReduceOperatingCosts with -25
+		contributesTo PositiveCityImage with 25
+		dependsOn Citizen.QualityofWasteSeparation
+	}
+	task UpgradeTrucks#""{
+		and decomposes ProcessGreenWaste
+	} 
+	task BuildGreenCentre#""{
+		and decomposes ProcessGreenWaste
+	} 
+	task GWEducationProgram#""{}
+	task UpdateTruckRoute#""{}
+	goal ComplywithStandards#""{}
+	goal HaveWorkersUnionContract#""{}
+	resource PurchaseLand#""{}
+}
+actor Citizen#""{
+	softgoal QualityofWasteSeparation#""{
+		importance 50
+	}
+	softgoal EnvironmentalConcern#""{
+		contributesTo QualityofWasteSeparation with 100
+	}
+	softgoal WillingnesstoSeparateWaste#""{
+		contributesTo QualityofWasteSeparation with 100
+		dependsOn City.GWEducationProgram
+	}
+	softgoal EnjoyCity#""{
+		importance 50 
+	}
+}

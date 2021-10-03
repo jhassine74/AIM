@@ -1,0 +1,42 @@
+urnModel Example {
+description "This-is-an-example."
+author "ITU-T"
+created "Feb-25-2020"
+modified "Feb-25-2020"
+version "1.0"
+urnVersion "29.0"
+}
+
+actor A#""{
+	goal G1#""{
+		importance 100
+		contributesTo G4 with 100
+	}
+	
+	goal G2#""{
+		contributesTo G1 with 100
+	}
+
+	task T1#""{ 
+		contributesTo G2 with 25
+	}
+	task T2#""{
+		contributesTo G2 with 25
+	}
+}
+
+
+actor B#""{
+	goal G3#""{
+		importance high
+	}
+
+	goal G4#""{
+		contributesTo G3 with 100
+		contributesTo A.G2 with 100
+	}
+	
+	task T3#""{
+		contributesTo G4 with 25
+	}
+}

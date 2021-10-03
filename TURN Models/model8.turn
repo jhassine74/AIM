@@ -1,0 +1,61 @@
+urnModel Example {
+description "This-is-an-example."
+author "ITU-T"
+created "Feb-25-2020"
+modified "Feb-25-2020"
+version "1.0"
+urnVersion "29.0"
+}
+
+actor PCUser#""{
+	goal PCProductsBeObtained#""{
+		importance Medium
+	}
+	softgoal AbidebyRules#""{}
+	softgoal AffordablePCProducts#""{}
+	task PurchasePCProduct#""{
+		contributesTo AbidebyRules with Make
+		contributesTo AffordablePCProducts with Hurt
+		or decomposes PCProductsBeObtained
+		dependsOn PCProvider.ProducePCProducts
+	}
+	task ObtainPCfromDataPirate#""{
+		contributesTo AbidebyRules with -100
+		contributesTo AffordablePCProducts with 25
+		or decomposes PCProductsBeObtained
+		dependsOn DataPirate.MakeContentAvailableP2P
+	}
+}
+
+actor DataPirate#""{
+	task MakeContentAvailableP2P#""{
+		importance High
+		dependsOn PCProvider.AllowP2PTech
+	}
+}
+
+actor PCProvider#""{
+	task SellPCforProfit#""{
+		importance high
+	}
+	task ProducePCProducts#""{
+		and decomposes SellPCforProfit
+	}
+	
+	softgoal Profit#""{
+		and decomposes SellPCforProfit
+	}
+
+	softgoal PCUserAbidebyRules#""{
+		contributesTo Profit with 25
+		dependsOn PCUser.AbidebyRules
+	}
+
+	softgoal DesirablePCProducts#""{
+		contributesTo Profit with Help
+	}
+
+	softgoal AllowP2PTech#""{
+		contributesTo DesirablePCProducts with 25
+	}
+}
